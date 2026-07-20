@@ -1,0 +1,126 @@
+================================================================================
+                    🚀 COMECE AGORA EM 2 MINUTOS
+================================================================================
+
+SEM PRECISAR DE CHAVE OpenAI!
+
+================================================================================
+                            PASSO 1: SETUP
+================================================================================
+
+Abra PowerShell e execute:
+
+    cd c:\git\sctec\m2s05\log-analyzer-agent
+    python -m venv venv
+    venv\Scripts\activate
+    pip install -r requirements.txt
+
+Tempo: 1-2 minutos
+
+================================================================================
+                         PASSO 2: EXECUTAR DEMO
+================================================================================
+
+Ainda no PowerShell (mesmo diretório):
+
+    python main_demo.py
+
+Tempo: <1 segundo
+
+Esperado: Você vê 5 etapas sendo executadas:
+    1️⃣  [validate_input] ✅
+    2️⃣  [read_log] ✅
+    3️⃣  [parse_events] ✅
+    4️⃣  [analyze_with_llm] (DEMO) ✅
+    5️⃣  [generate_report] ✅
+
+Resultado: Arquivo salvo em examples/reports/latest_report_demo.md
+
+================================================================================
+                      ✅ PRONTO! VOCÊ CONSEGUIU!
+================================================================================
+
+O que você acaba de fazer:
+
+✅ Executou um agente LangGraph
+✅ Processou um arquivo de log
+✅ Gerou um relatório técnico
+✅ Tudo sem OpenAI!
+
+================================================================================
+                       PRÓXIMOS PASSOS (Opcional)
+================================================================================
+
+Para aprender mais:
+
+1. Leia: README.md
+   cd . & notepad README.md
+
+2. Leia: docs/APRESENTACAO.md
+   cd . & notepad docs\APRESENTACAO.md
+
+3. Leia: DEMO_MODE_README.md
+   cd . & notepad DEMO_MODE_README.md
+
+Para usar com análise IA real (GPT-4):
+
+1. Vá para: https://platform.openai.com/api-keys
+2. Crie uma chave (grátis com trial)
+3. Edite .env com a chave
+4. Execute: python main.py
+
+================================================================================
+                           TROUBLESHOOTING
+================================================================================
+
+Erro "module not found"?
+→ Certifique-se que venv está ativado (deve ter (venv) no início do prompt)
+
+Erro "Python not found"?
+→ Instale Python 3.10+ de: https://python.org
+
+Erro "permissão negada"?
+→ Execute PowerShell como administrador
+
+Tudo funcionando mas quer testar com seus próprios logs?
+→ Coloque arquivo .log em examples/logs/ e edite main_demo.py (line: log_file)
+
+================================================================================
+                         ESTRUTURA DO PROJETO
+================================================================================
+
+log-analyzer-agent/
+├─ main_demo.py              ← Execute isto agora!
+├─ main.py                   ← Para modo com OpenAI
+├─ README.md                 ← Documentação
+├─ DEMO_MODE_README.md       ← Sobre modo demo
+├─ src/
+│  ├─ agent/                 ← LangGraph
+│  └─ tools/                 ← Ferramentas
+├─ examples/
+│  └─ logs/app.log           ← Seu log de teste
+└─ (outros arquivos...)
+
+================================================================================
+                              RESUMO
+================================================================================
+
+Você tem 2 opcões:
+
+1. MODO DEMO (Recomendado para começar)
+   Comando: python main_demo.py
+   Requer: Nada (roda agora!)
+   Análise: Simulada
+   
+2. MODO COMPLETO (Com análise real)
+   Comando: python main.py
+   Requer: Chave OpenAI
+   Análise: GPT-4 Real
+
+COMECE AGORA COM DEMO! 🚀
+
+================================================================================
+
+Dúvidas? Leia DEMO_MODE_README.md ou OPENAI_SETUP.md
+
+Boa sorte! 🎉

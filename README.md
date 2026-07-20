@@ -111,16 +111,32 @@ REPORT_OUTPUT_PATH=examples/reports/
 
 ### Execução
 
+#### Opção 1: Modo DEMO (Sem OpenAI - Recomendado para começar)
+
+```bash
+python main_demo.py
+```
+
+Este modo funciona **sem chave OpenAI** e simula a análise de IA com padrões heurísticos.
+Ideal para testar, aprender e avaliar a estrutura do projeto.
+
+#### Opção 2: Modo Completo (Com Análise IA Real)
+
 ```bash
 python main.py
 ```
+
+Este modo usa **GPT-4** para análise inteligente (requer OpenAI API key).
+Para configurar a chave, veja [OPENAI_SETUP.md](OPENAI_SETUP.md).
+
+### Fluxo de Execução
 
 O agente irá:
 1. Validar o arquivo de entrada
 2. Ler o arquivo de log
 3. Processar e categorizar eventos
-4. Analisar com IA
-5. Gerar um relatório em `examples/reports/latest_report.md`
+4. Analisar com IA (ou modo simulado)
+5. Gerar um relatório em `examples/reports/`
 
 ## 📁 Estrutura do Projeto
 
