@@ -312,7 +312,7 @@ Este projeto demonstra:
 
 ---
 
-**Última atualização**: Janeiro 2024  
+**Última atualização**: 20 de julho de 2026  
 **Versão**: 1.0.0  
 **Status**: ✅ Pronto para avaliação
 

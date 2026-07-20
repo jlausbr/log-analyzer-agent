@@ -485,5 +485,5 @@ Este projeto demonstra:
 
 **Mini-Projeto M2S05 - IA para Desenvolvedores**
 **Autor**: jlausbr
-**Data**: Janeiro 2024
+**Data**: 20 de julho de 2026
 **Status**: ✅ Completo

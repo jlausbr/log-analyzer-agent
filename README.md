@@ -339,5 +339,5 @@ Contribuições são bem-vindas! Por favor, abra uma issue ou pull request.
 
 ---
 
-**Última atualização**: Janeiro 2024
+**Última atualização**: 20 de julho de 2026
 **Status**: Protótipo - Mini-Projeto Avaliativo (M2S05)
