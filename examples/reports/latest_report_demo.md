@@ -7,7 +7,7 @@ Para analise completa com IA, execute: `python main.py` com OpenAI API key.
 ## Executive Summary
 
 File: examples/logs/app.log
-Analysis Date: Mon Jul 20 12:39:16 2026
+Analysis Date: Mon Jul 20 13:29:44 2026
 Mode: Demo (sem LLM)
 
 ## Log Statistics
