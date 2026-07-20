@@ -2,6 +2,108 @@
 
 Este documento descreve os principais prompts utilizados no agente de análise de logs, explicando sua função e como foram otimizados para o caso de uso.
 
+---
+
+## 0. Prompt Inicial - Contexto do Projeto
+
+### Descrição do Projeto
+
+**Contexto Geral**:
+Sou um desenvolvedor aprendendo o desenvolvimento do uso de agentes de IA, com uso de **LangGraph**.
+
+**Objetivo Educacional**:
+Desenvolver um mini-projeto avaliativo, com base nas regras definidas para o mini-projeto M2S05 (Mini-Projeto Avaliativo).
+
+**Estrutura do Projeto**:
+- **Tipo**: Mini-projeto avaliativo individual
+- **Linguagem**: Python
+- **Framework**: LangGraph com LangChain
+- **Modelo LLM**: GPT-4 Turbo
+- **Repositório**: https://github.com/jlausbr/log-analyzer-agent
+
+### Tema e Funcionalidade
+
+**Tipo de Agente**: Agente para Análise Automatizada de Logs e Geração de Relatórios Técnicos
+
+**Propósito Principal**:
+- Automatizar análise de arquivos de log aplicacionais
+- Identificar padrões de erro e problemas técnicos
+- Gerar relatórios estruturados e acionáveis
+- Fornecer diagnóstico de root cause com recomendações
+
+**Ferramenta Principal**:
+- **Tool 1 - read_log_file()**: Leitura segura de arquivos de log internos
+- **Tool 2 - process_log_events()**: Processamento e categorização de eventos de log
+
+### Arquitetura LangGraph
+
+**Fluxo de 5 Nós**:
+1. `validate_input` - Valida arquivo e extensão
+2. `read_log_file` - Lê arquivo com segurança (usa Tool 1)
+3. `parse_events` - Processa e categoriza eventos (usa Tool 2)
+4. `analyze_with_llm` - Análise inteligente com GPT-4
+5. `generate_report` - Gera relatório Markdown estruturado
+
+**State Management**: Pydantic `LogAnalysisState` com type hints completos
+
+### Exemplo de Implementação de Referência
+
+**Projeto Base**: Stack Sentinel (branch "aula5")
+- Repositório: https://github.com/jlausbr/log-analyzer-agent (versão original)
+- Utilizou-se como base para conceitos de:
+  - Estrutura LangGraph
+  - Padrões de tools
+  - Tratamento de estado
+  - Geração de relatórios
+
+### Informações do Desenvolvedor
+
+- **GitHub**: https://github.com/jlausbr
+- **Projeto**: log-analyzer-agent
+- **Disciplina**: IA para Desenvolvedores (M2S05/M2S06)
+- **Data**: 20 de julho de 2026
+
+### Decisões de Design
+
+**Por que Análise de Logs?**
+- Caso de uso real e bem-definido
+- Demonstra uso prático de agentes IA
+- Permite mostrar integração de tools customizadas
+- Aplicável em múltiplos contextos de desenvolvimento
+
+**Por que LangGraph?**
+- Orquestração clara de fluxos
+- Definição explícita de estados
+- Melhor controle sobre o fluxo do agente
+- Melhor debugging e observabilidade
+
+**Por que GPT-4?**
+- Qualidade superior em análise técnica
+- Melhor compreensão de contexto
+- Recomendações mais precisas
+- Justificado para projeto avaliativo
+
+### Sugestões Futuras para Expansão
+
+1. **Multi-formato**: Suportar outros formatos (JSON, CSV, sistemas de log)
+2. **Análise Temporal**: Correlacionar erros com eventos de deployment
+3. **Machine Learning**: Detectar anomalias em padrões históricos
+4. **Integração**: Conectar com ferramentas de monitoramento (DataDog, New Relic)
+5. **Alertas**: Notificações automáticas para problemas críticos
+
+### Critérios de Sucesso
+
+✅ Agente LangGraph funcional com 5 nós  
+✅ 2 Tools customizadas implementadas  
+✅ Análise com GPT-4 integrada  
+✅ Validação em 8 camadas  
+✅ 10+ testes unitários  
+✅ 100% type hints (Pydantic)  
+✅ Documentação completa  
+✅ Relatórios Markdown estruturados  
+
+---
+
 ## 1. System Prompt - Análise Técnica
 
 **Localização**: `src/agent/graph.py` - Nó `analyze_with_llm`
