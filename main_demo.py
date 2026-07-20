@@ -3,13 +3,18 @@
 import os
 import sys
 from pathlib import Path
+from datetime import datetime
 from dotenv import load_dotenv
+
+# Change to project root
+os.chdir(Path(__file__).parent)
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from agent.state import LogAnalysisState
-from agent.graph import create_log_analyzer_agent
+# Now import tools directly without going through graph
+from tools.log_reader import read_log_file
+from tools.log_processor import process_log_events
 
 
 def demo_without_llm():
@@ -29,32 +34,27 @@ def demo_without_llm():
     print("LOG ANALYZER AGENT - DEMO MODE (Sem OpenAI)")
     print("=" * 70)
     print(f"\nAnalisando: {log_file}")
-    print("\n📝 Executando nós do agente (sem LLM)...\n")
+    print("\n[*] Executando nos do agente (sem LLM)...\n")
     
-    # Import tools directly for demo
-    from tools.log_reader import read_log_file
-    from tools.log_processor import process_log_events
-    from datetime import datetime
-    
-    # Nó 1: Validação
-    print("1️⃣  [validate_input] Validando arquivo...")
+    # Node 1: Validation
+    print("[1/5] [validate_input] Validando arquivo...")
     if not log_file.endswith((".log", ".txt")):
-        print("   ❌ Arquivo inválido")
+        print("   [X] Arquivo invalido")
         sys.exit(1)
-    print("   ✅ Arquivo validado")
+    print("   [OK] Arquivo validado")
     
-    # Nó 2: Leitura
-    print("\n2️⃣  [read_log] Lendo arquivo...")
+    # Node 2: Reading
+    print("\n[2/5] [read_log] Lendo arquivo...")
     max_lines = int(os.getenv("MAX_LOG_LINES", 500))
     result = read_log_file(log_file, max_lines=max_lines)
     
     if not result["success"]:
-        print(f"   ❌ Erro: {result['error']}")
+        print(f"   [X] Erro: {result['error']}")
         sys.exit(1)
     
-    print(f"   ✅ Arquivo lido com sucesso")
-    print(f"   📊 Total de linhas: {result['total_lines']}")
-    print(f"   📁 Tamanho do arquivo: {result['file_size']} bytes")
+    print(f"   [OK] Arquivo lido com sucesso")
+    print(f"   [INFO] Total de linhas: {result['total_lines']}")
+    print(f"   [INFO] Tamanho do arquivo: {result['file_size']} bytes")
     
     log_content = result["content"]
     metadata = {
@@ -64,24 +64,24 @@ def demo_without_llm():
         "file_size": result["file_size"],
     }
     
-    # Nó 3: Processamento
-    print("\n3️⃣  [parse_events] Processando eventos...")
+    # Node 3: Processing
+    print("\n[3/5] [parse_events] Processando eventos...")
     parsed_events = process_log_events(log_content)
     
-    print(f"   ✅ Eventos processados")
-    print(f"   🔴 ERRORs: {parsed_events['error_count']}")
-    print(f"   🟡 WARNINGs: {parsed_events['warning_count']}")
-    print(f"   🔵 INFOs: {parsed_events['info_count']}")
-    print(f"   ⚪ Outros: {parsed_events['other_count']}")
+    print(f"   [OK] Eventos processados")
+    print(f"   [ERROR] ERRORs: {parsed_events['error_count']}")
+    print(f"   [WARN] WARNINGs: {parsed_events['warning_count']}")
+    print(f"   [INFO] INFOs: {parsed_events['info_count']}")
+    print(f"   [OTHER] Outros: {parsed_events['other_count']}")
     
-    # Nó 4: Análise (versão mock)
-    print("\n4️⃣  [analyze_with_llm] Analisando com IA (MOCK - sem OpenAI)...")
+    # Node 4: Analysis (mock)
+    print("\n[4/5] [analyze_with_llm] Analisando com IA (MOCK - sem OpenAI)...")
     
     mock_analysis = generate_mock_analysis(parsed_events)
-    print("   ✅ Análise realizada (modo demo)")
+    print("   [OK] Analise realizada (modo demo)")
     
-    # Nó 5: Relatório
-    print("\n5️⃣  [generate_report] Gerando relatório...")
+    # Node 5: Report
+    print("\n[5/5] [generate_report] Gerando relatorio...")
     
     report = generate_demo_report(
         metadata,
@@ -89,11 +89,11 @@ def demo_without_llm():
         mock_analysis
     )
     
-    print("   ✅ Relatório gerado\n")
+    print("   [OK] Relatorio gerado\n")
     
     # Display report
     print("\n" + "=" * 70)
-    print("RELATÓRIO GERADO")
+    print("RELATORIO GERADO")
     print("=" * 70)
     print(report)
     
@@ -102,17 +102,17 @@ def demo_without_llm():
     Path(output_path).mkdir(parents=True, exist_ok=True)
     
     report_file = Path(output_path) / "latest_report_demo.md"
-    report_file.write_text(report)
-    print(f"\n✅ Relatório salvo em: {report_file}")
+    report_file.write_text(report, encoding='utf-8')
+    print(f"\n[OK] Relatorio salvo em: {report_file}")
     
     print("\n" + "=" * 70)
-    print("DEMO CONCLUÍDO COM SUCESSO!")
+    print("DEMO CONCLUIDO COM SUCESSO!")
     print("=" * 70)
-    print("\n💡 Observações:")
-    print("   - Este é o modo DEMO (sem OpenAI)")
-    print("   - A análise de IA foi substituída por padrões pré-definidos")
-    print("   - Para análise completa, use main.py com OpenAI API key")
-    print("   - Todos os outros nós funcionam normalmente\n")
+    print("\n[*] Observacoes:")
+    print("   - Este eh o modo DEMO (sem OpenAI)")
+    print("   - A analise de IA foi substituida por padroes pre-definidos")
+    print("   - Para analise completa, use main.py com OpenAI API key")
+    print("   - Todos os outros nos funcionam normalmente\n")
 
 
 def generate_mock_analysis(events: dict) -> str:
@@ -126,11 +126,11 @@ def generate_mock_analysis(events: dict) -> str:
     error_rate = (events['error_count'] / total * 100) if total > 0 else 0
     
     if error_rate > 20:
-        analysis += f"⚠️ **CRITICAL**: Taxa de erro muito alta ({error_rate:.1f}%)\n\n"
+        analysis += f"** CRITICAL: Taxa de erro muito alta ({error_rate:.1f}%)\n\n"
     elif error_rate > 10:
-        analysis += f"⚠️ **HIGH**: Taxa de erro elevada ({error_rate:.1f}%)\n\n"
+        analysis += f"** HIGH: Taxa de erro elevada ({error_rate:.1f}%)\n\n"
     else:
-        analysis += f"✅ **GOOD**: Taxa de erro aceitável ({error_rate:.1f}%)\n\n"
+        analysis += f"** GOOD: Taxa de erro aceitavel ({error_rate:.1f}%)\n\n"
     
     # Critical issues
     analysis += "## Critical Issues Identified\n\n"
@@ -141,7 +141,7 @@ def generate_mock_analysis(events: dict) -> str:
         if events['top_error_patterns']:
             analysis += "   Top error patterns:\n"
             for i, (pattern, count) in enumerate(events['top_error_patterns'][:3], 1):
-                analysis += f"   - {pattern[:60]}... (×{count})\n"
+                analysis += f"   - {pattern[:60]}... (x{count})\n"
     
     analysis += "\n## Root Cause Analysis\n\n"
     
@@ -169,13 +169,11 @@ def generate_mock_analysis(events: dict) -> str:
 def generate_demo_report(metadata: dict, events: dict, analysis: str) -> str:
     """Generate the final demo report."""
     
-    from datetime import datetime
-    
     report = f"""# Technical Log Analysis Report - DEMO MODE
 
-⚠️ **NOTA**: Este relatório foi gerado em modo DEMO (sem OpenAI API).
-A análise de IA é simulada usando padrões heurísticos.
-Para análise completa com IA, execute: `python main.py` com OpenAI API key.
+** NOTA: Este relatorio foi gerado em modo DEMO (sem OpenAI API).
+A analise de IA eh simulada usando padroes heuristicos.
+Para analise completa com IA, execute: `python main.py` com OpenAI API key.
 
 ## Executive Summary
 
@@ -225,14 +223,14 @@ Mode: Demo (sem LLM)
     report += """
 ---
 
-## 💡 Como Usar Este Projeto
+## Como Usar Este Projeto
 
 ### Modo DEMO (sem OpenAI):
 ```bash
 python main_demo.py
 ```
 
-### Modo Completo (com análise IA):
+### Modo Completo (com analise IA):
 ```bash
 # 1. Obtenha uma chave OpenAI em: https://platform.openai.com/api-keys
 # 2. Configure no .env
@@ -240,12 +238,12 @@ python main_demo.py
 python main.py
 ```
 
-### Como Obter OpenAI API Key (Grátis até $5):
+### Como Obter OpenAI API Key (Gratis ate $5):
 
-1. Vá para: https://platform.openai.com/account/api-keys
-2. Faça login ou crie conta
+1. Va para: https://platform.openai.com/account/api-keys
+2. Faca login ou crie conta
 3. Clique em "Create new secret key"
-4. Copie a chave (começa com 'sk-')
+4. Copie a chave (comeca com 'sk-')
 5. Cole no arquivo `.env`:
    ```
    OPENAI_API_KEY=sk-sua-chave-aqui
@@ -254,7 +252,7 @@ python main.py
 ---
 
 *Generated by Log Analyzer Agent - Demo Mode*
-*Para análise completa, use OpenAI API*
+*Para analise completa, use OpenAI API*
 """
     
     return report
