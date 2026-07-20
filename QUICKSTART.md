@@ -1,71 +1,65 @@
 # Quick Start Guide - Log Analyzer Agent
 
-Comece em 5 minutos! 🚀
+Comece em 2-5 minutos! 🚀
 
-## 1. Setup (2 min)
+## ⚡ Opção 1: Modo DEMO (SEM OpenAI - Comece AGORA)
 
 ```bash
-# Entre no diretório do projeto
+# 1. Entre no diretório do projeto
 cd c:\git\sctec\m2s05\log-analyzer-agent
 
-# Crie um ambiente virtual
+# 2. Crie ambiente virtual
 python -m venv venv
 
-# Ative o ambiente
+# 3. Ative
 venv\Scripts\activate
 
-# Instale as dependências
+# 4. Instale dependências
 pip install -r requirements.txt
+
+# 5. Execute modo DEMO (sem chave OpenAI)
+python main_demo.py
 ```
 
-## 2. Configuração (1 min)
-
-```bash
-# Copie o arquivo de exemplo
-copy .env.example .env
-```
-
-Edite o arquivo `.env` e adicione sua chave OpenAI:
-
-```env
-OPENAI_API_KEY=sk-sua-chave-aqui
-LOG_FILE_PATH=examples/logs/app.log
-MAX_LOG_LINES=500
-REPORT_OUTPUT_PATH=examples/reports/
-```
-
-## 3. Execute (2 min)
-
-```bash
-python main.py
-```
-
-Você deverá ver:
-
-```
-Initializing Log Analyzer Agent...
-Analyzing log file: examples/logs/app.log
-============================================================
-ANALYSIS COMPLETE
-============================================================
-
-[Relatório técnico completo aqui]
-
-Report saved to: examples/reports/latest_report.md
-```
-
-## 4. Verifique o Relatório
-
-Abra `examples/reports/latest_report.md` em seu editor de texto ou markdown viewer.
+✅ Pronto! Relatório gerado em `examples/reports/latest_report_demo.md`
 
 ---
 
-## 📚 Próximas Etapas
+## 🔑 Opção 2: Modo Completo (Com OpenAI)
 
-- Leia o [README.md](README.md) para documentação completa
-- Explore [docs/prompts.md](docs/prompts.md) para entender os prompts
-- Veja [docs/APRESENTACAO.md](docs/APRESENTACAO.md) para arquitetura
-- Execute os testes: `pytest tests/ -v`
+```bash
+# Depois de fazer os passos 1-4 acima:
+
+# 5. Configure .env
+copy .env.example .env
+
+# Edite .env e adicione sua chave:
+# OPENAI_API_KEY=sk-sua-chave-aqui
+
+# 6. Execute com análise IA completa
+python main.py
+```
+
+✅ Relatório com análise GPT-4 em `examples/reports/latest_report.md`
+
+---
+
+## 📋 Diferenças
+
+| Aspecto | DEMO | Completo |
+|---------|------|----------|
+| **Requer Chave** | ❌ | ✅ |
+| **Análise** | Simulada | GPT-4 Real |
+| **Tempo Setup** | 2 min | 5 min |
+| **Funciona Agora** | ✅ | ⏳ Precisa chave |
+
+---
+
+## 🔑 Como Obter Chave OpenAI
+
+Ver: [OPENAI_SETUP.md](OPENAI_SETUP.md)
+
+Rápido: **https://platform.openai.com/api-keys** (grátis + trial)
 
 ## 🔧 Troubleshooting
 

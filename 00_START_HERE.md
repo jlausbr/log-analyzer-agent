@@ -4,7 +4,7 @@
 
 ---
 
-## ⚡ Em 5 Minutos
+## ⚡ Em 2 Minutos (SEM Chave OpenAI)
 
 ### 1. Instale Dependências
 ```bash
@@ -14,19 +14,25 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Configure Ambiente
+### 2. Execute Modo DEMO (sem OpenAI)
 ```bash
-copy .env.example .env
-# Edite .env e adicione sua chave OpenAI:
-# OPENAI_API_KEY=sk-sua-chave-aqui
+python main_demo.py
 ```
 
-### 3. Execute!
+✅ Pronto! Seu primeiro relatório foi gerado em `examples/reports/latest_report_demo.md`
+
+---
+
+## 🔑 Se Tiver Chave OpenAI (5 min)
+
 ```bash
+# 1. Configure .env
+copy .env.example .env
+# Edite .env e adicione: OPENAI_API_KEY=sk-sua-chave
+
+# 2. Execute com análise IA completa
 python main.py
 ```
-
-✅ Pronto! Seu primeiro relatório foi gerado em `examples/reports/latest_report.md`
 
 ---
 
@@ -36,6 +42,7 @@ python main.py
 |---------|---------|-------|
 | [QUICKSTART.md](QUICKSTART.md) | Guia de 5 minutos | 5 min |
 | [README.md](README.md) | Documentação completa | 20 min |
+| [OPENAI_SETUP.md](OPENAI_SETUP.md) | Como obter chave OpenAI (grátis) | 10 min |
 | [INDEX.md](INDEX.md) | Mapa de toda documentação | 10 min |
 | [docs/APRESENTACAO.md](docs/APRESENTACAO.md) | Slides técnicos (2) | 15 min |
 
